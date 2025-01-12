@@ -13,6 +13,10 @@ const StreakPage: React.FC = () => {
         return storedDate ? new Date(storedDate) : new Date();
     });
 
+    const handleBack =() => {
+        window.location.href = '/';
+    }
+
     useEffect (() => {
         localStorage.setItem('streakData', JSON.stringify(streakData));
     }, [streakData]);
@@ -67,6 +71,15 @@ const StreakPage: React.FC = () => {
                 >
                     Make Purchase!
                 </button>
+                <button
+                    style={{
+                        ...styles.button,
+                        backgroundColor: '#f44336', 
+                    }}
+                    onClick={handleBack}
+                >
+                    Back
+                </button>    
             </div>
         </div>
     );
