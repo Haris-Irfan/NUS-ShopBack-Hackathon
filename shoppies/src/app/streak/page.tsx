@@ -148,6 +148,7 @@ export default function Streak() {
               >
                 Day {index + 1}
               </Box>
+              
             ))}
           </Box>
         </Box>
