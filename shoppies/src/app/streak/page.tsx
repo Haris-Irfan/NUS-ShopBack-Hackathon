@@ -81,90 +81,89 @@ export default function Streak() {
     setUp()
 
     return (
-        <Container sx={{ bgcolor: 'black', height: '100vh', width: '100vw', p: 2 }}>
-  {/* Header */}
-  <Box
-    component="header"
-    sx={{
-      backgroundColor: 'red',
-      color: 'white',
-      py: 4,
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      width: '100%',
-      zIndex: 10,
-    }}
-  >
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 4 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <IconButton color="inherit" onClick={() => toggleDrawer(true)}>
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-          Streak Tracker
-        </Typography>
-      </Box>
-    </Box>
-  </Box>
-
-  {/* Calendar-like Streak Tracker */}
-  <Box
-    sx={{
-      pt: 12, 
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'center',
-      alignItems: 'center',
-      bgcolor: 'white',
-    }}
-  >
-    <Typography variant="h6" sx={{ color: 'black', mb: 2 }}>
-      Your Streak Calendar
-    </Typography>
-    <Box
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(7, 1fr)', 
-        gap: 2,
-        maxWidth: '90%', 
-      }}
-    >
-      {[...Array(30)].map((_, index) => (
+      <Container sx={{ backgroundColor: 'white', height: '100vh', width: '100vw', p: 2 }}>
+        {/* Header */}
         <Box
-          key={index}
+          component="header"
           sx={{
-            aspectRatio: '1', 
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            bgcolor: streak.length > index ? 'green' : 'gray',
-            borderRadius: 1,
+            backgroundColor: 'red',
             color: 'white',
-            fontSize: '0.875rem',
-            fontWeight: 'bold',
-            cursor: 'default',
+            py: 4,
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            zIndex: 10,
           }}
         >
-          Day {index + 1}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: 4 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <IconButton color="inherit" onClick={() => toggleDrawer(true)}>
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Streak Tracker
+              </Typography>
+            </Box>
+          </Box>
         </Box>
-      ))}
-    </Box>
-  </Box>
 
-  {/* Return Button */}
-  <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-    <Button variant="contained" color="primary" onClick={() => (window.location.href = '../')}>
-      Return
-    </Button>
-  </Box>
+        {/* Calendar-like Streak Tracker */}
+        <Box
+          sx={{
+            pt: 12, 
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            bgcolor: 'white',
+          }}
+        >
+          <Typography variant="h6" sx={{ color: 'black', mb: 2 }}>
+            Your Streak Calendar
+          </Typography>
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(7, 1fr)', 
+              gap: 2,
+              maxWidth: '90%', 
+            }}
+          >
+            {[...Array(30)].map((_, index) => (
+              <Box
+                key={index}
+                sx={{
+                  aspectRatio: '1', 
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  bgcolor: streak.length > index ? 'green' : 'gray',
+                  borderRadius: 1,
+                  color: 'white',
+                  fontSize: '0.875rem',
+                  fontWeight: 'bold',
+                  cursor: 'default',
+                }}
+              >
+                Day {index + 1}
+              </Box>
+            ))}
+          </Box>
+        </Box>
 
-  {/* Drawer */}
-  <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
-    {drawerContent}
-  </Drawer>
-</Container>
+        {/* Return Button */}
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          <Button variant="contained" color="primary" onClick={() => (window.location.href = '../')}>
+            Return
+          </Button>
+        </Box>
 
+        {/* Drawer */}
+        <Drawer anchor="left" open={drawerOpen} onClose={() => toggleDrawer(false)}>
+          {drawerContent}
+        </Drawer>
+      </Container>
     )
 }
 
