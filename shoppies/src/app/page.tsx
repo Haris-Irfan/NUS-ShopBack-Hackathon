@@ -62,6 +62,9 @@ const Home: React.FC = () => {
   const handleLoginPress = () => {
     setPopup('login');
   };
+  const handleSignUpPress = () => {
+    setPopup('signup');
+  };
   const handleSimulatePurchasePress = () => {
     setPopup('purchase')
   }
@@ -217,7 +220,7 @@ const Home: React.FC = () => {
 
   const shopTypeButtons = [
     { label: "Weekly Quests", action: handleWeeklyQuest },
-    { label: "Donation Streak", action: handlePurchaseStreak },
+    { label: "Purchase Streak", action: handlePurchaseStreak },
     { label: "Redeem Rewards", action: handleRedeemRewards },
     { label: "Vouchers", action: () => console.log() },
     { label: "Sign Out", action: () => console.log("Sign Out clicked") },
@@ -316,6 +319,19 @@ const Home: React.FC = () => {
             >
               Login
             </Button>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: 'red',
+                color: 'white',
+                // boxShadow: "0px 4px 10px rgba(255, 255, 255, 0.8)",
+                fontWeight: 'bold',
+                '&:hover': { backgroundColor: 'grey' }
+              }}
+              onClick={handleSignUpPress}
+            >
+              Sign Up
+            </Button>
           </Box>
         </Box>
       </Box>
@@ -393,14 +409,14 @@ const Home: React.FC = () => {
             <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
               Weekly Quests
             </Typography>
-            <Box component="ul" sx={{ listStyleType: 'disc', paddingLeft: 2, marginBottom: 3 }}>
-              <Box component="li" sx={{ marginBottom: 1 }}>
+            <Box component="ul" sx={{ paddingLeft: 2, marginBottom: 3 }}>
+              <Box sx={{ marginBottom: 1 }}>
                 10 points: Log in (1/3)
               </Box>
-              <Box component="li" sx={{ marginBottom: 1 }}>
+              <Box sx={{ marginBottom: 1 }}>
                 20 points: Purchase items (0/5)
               </Box>
-              <Box component="li">
+              <Box >
                 30 points: Visit 'Rewards' Page (1/1)
               </Box>
             </Box>
@@ -415,6 +431,137 @@ const Home: React.FC = () => {
           </Box>
         </Box>
       )}
+
+      {/* Login Popup */}
+      {popup === 'login' && ( 
+        <Box
+          sx={{ 
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1300,
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              padding: 4,
+              borderRadius: 2,
+              boxShadow: 3,
+              width: '24rem',
+              textAlign: 'center',
+            }}
+          >
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
+              Login
+            </Typography>
+            <IconButton
+              onClick={() => setPopup(null)}
+              sx={{ position: 'absolute', top: 0, right: 0 }}
+            >
+              <CloseIcon sx={{ color: "white" }}/>
+            </IconButton>
+          </Box>
+            <form onSubmit={handleLogin}>
+              <TextField
+                label="Email"
+                variant="outlined"
+                type= "email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                sx={{ width: '100%', marginBottom: 2 }}
+              />
+              <TextField
+                label="Password"
+                variant="outlined"
+                type= "password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{ width: '100%', marginBottom: 2 }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="error"
+                sx={{ width: '100%', marginTop: 2 }}
+              >
+                Login
+              </Button>
+            </form>
+            {error && <Alert severity="error" sx={{ marginTop: 2 }}>{error}</Alert>}
+          </Box>
+        </Box>
+      )}
+
+      {/* Sign Up Popup */}
+      {popup === 'signup' && ( 
+        <Box
+          sx={{ 
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1300,
+          }}
+        >
+          <Box
+            sx={{
+              backgroundColor: 'white',
+              padding: 4,
+              borderRadius: 2,
+              boxShadow: 3,
+              width: '24rem',
+              textAlign: 'center',
+            }}
+          >
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Typography variant="h6" sx={{ marginBottom: 2, fontWeight: 'bold' }}>
+              Login
+            </Typography>
+            <IconButton
+              onClick={() => setPopup(null)}
+              sx={{ position: 'absolute', top: 0, right: 0 }}
+            >
+              <CloseIcon sx={{ color: "white" }}/>
+            </IconButton>
+          </Box>
+            <form onSubmit={handleSignUp}>
+              <TextField
+                label="Email"
+                variant="outlined"
+                type= "email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                sx={{ width: '100%', marginBottom: 2 }}
+              />
+              <TextField
+                label="Password"
+                variant="outlined"
+                type= "password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{ width: '100%', marginBottom: 2 }}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="error"
+                sx={{ width: '100%', marginTop: 2 }}
+              >
+                Sign Up
+              </Button>
+            </form>
+            {error && <Alert severity="error" sx={{ marginTop: 2 }}>{error}</Alert>}
+          </Box>
+        </Box>
+      )}
+      
       {/* Drawer */}
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         {drawerContent}
